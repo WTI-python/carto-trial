@@ -1,0 +1,13 @@
+CREATE TABLE
+  `carto-dw-ac-qsr81yp.shared.qc_linestrings` AS
+SELECT
+  geom
+FROM
+  `carto-dw-ac-qsr81yp.shared.WTI_Roads_shp`
+WHERE
+  --Keep only highway, discard buildings, borders ...
+ 	ST_INTERSECTS(geom,
+    --NY Liberty Island Bounding Box:
+    ST_GEOGFROMGEOJSON("""{"type": "Polygon", 
+    "coordinates": [[[121.02560885094428, 14.645502857532241], [121.04999521168055, 14.643955504393547], [121.04914341372029, 14.62751937572621], 
+    [121.02555931916758, 14.631536639873708], [121.02560885094428, 14.645502857532241] ]]}""") ) 
