@@ -1,0 +1,13 @@
+CREATE OR REPLACE TABLE
+  `carto-dw-ac-qsr81yp.shared.new_linestrings` AS
+WITH
+  T AS(
+  SELECT
+    `carto-un-as-ne1`.carto.GENERATE_NETWORK(ARRAY_AGG(STRUCT(geometry, 1.))) generate_network
+  FROM
+    `mydataset.my_test_linestrings` )
+SELECT
+  myunnest.*
+FROM
+  T,
+  UNNEST(generate_network) myunnest
