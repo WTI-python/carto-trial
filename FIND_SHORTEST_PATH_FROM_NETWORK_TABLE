@@ -1,5 +1,5 @@
 CALL
-  `carto-un-as-ne1`.carto.FIND_SHORTEST_PATH_FROM_NETWORK_TABLE("carto-dw-ac-qsr81yp.shared.WTI_Roads_10_csv",
+  `carto-un-as-ne1`.carto.FIND_SHORTEST_PATH_FROM_NETWORK_TABLE("carto-dw-ac-qsr81yp.shared.qc_linestrings",
     "carto-dw-ac-qsr81yp.shared.Roads_shortestpath",
     "ST_geogpoint(121.037752,14.643245)",
     "ST_geogpoint(121.041287,14.635847)" )
