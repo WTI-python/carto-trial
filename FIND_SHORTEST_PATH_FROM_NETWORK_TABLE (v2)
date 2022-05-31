@@ -1,0 +1,6 @@
+CALL `carto-un-as-ne1`.carto.FIND_SHORTEST_PATH_FROM_NETWORK_TABLE(
+  "carto-dw-ac-qsr81yp.shared.linestring_collection_table_v2",
+  "carto-dw-ac-qsr81yp.shared.shortest_path_table",
+  "ST_GEOGPOINT(-74.0, 40.0)",
+  "ST_GEOGPOINT(-75.0, 41.0)"
+);
