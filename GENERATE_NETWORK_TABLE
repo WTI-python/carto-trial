@@ -1,13 +1,10 @@
-CREATE OR REPLACE TABLE
-  `carto-dw-ac-qsr81yp.shared.new_linestrings` AS
-WITH
-  T AS(
-  SELECT
-    `carto-un-as-ne1`.carto.GENERATE_NETWORK(ARRAY_AGG(STRUCT(geometry, 1.))) generate_network
-  FROM
-    `mydataset.my_test_linestrings` )
-SELECT
-  myunnest.*
-FROM
-  T,
-  UNNEST(generate_network) myunnest
+CREATE TABLE shared.linestring_collection_table_v2 AS
+  SELECT ST_MAKELINE(ARRAY_AGG(ST_geogpoint( lon, lat ))) geo
+  FROM unnest(GENERATE_ARRAY(-74.00, -73.90, 0.01)) lon, unnest(GENERATE_ARRAY(40.60, 40.85, 0.01)) lat
+  WHERE lon+lat<-73.95+40.75 --remove some nodes of the grid
+  GROUP BY lon
+  UNION ALL
+  SELECT ST_MAKELINE(ARRAY_AGG(ST_geogpoint( lon, lat ))) geo
+  FROM unnest(GENERATE_ARRAY(-74.15, -73.87, 0.01)) lon, unnest(GENERATE_ARRAY(40.68, 40.77, 0.01)) lat
+  WHERE lon+lat<-73.95+40.75 --remove some nodes of the grid
+  GROUP BY lat;
